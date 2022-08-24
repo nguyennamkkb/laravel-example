@@ -20,10 +20,6 @@
       <div class="title mb-4">
         {{ title }}
       </div>
-
-      <div class="links">
-        <a href="https://github.com/cretueusebiu/laravel-vue-spa">github.com/cretueusebiu/laravel-vue-spa</a>
-      </div>
     </div>
   </div>
 </template>
@@ -34,7 +30,7 @@ import { mapGetters } from 'vuex'
 export default {
   layout: 'basic',
 
-  metaInfo () {
+  metaInfo() {
     return { title: this.$t('home') }
   },
 

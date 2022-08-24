@@ -9,13 +9,9 @@
               $t("email")
             }}</label>
             <div class="col-md-7">
-              <input
-                v-model="form.email"
-                :class="{ 'is-invalid': form.errors.has('email') }"
-                class="form-control"
-                type="email"
-                name="email"
-              />
+              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control"
+                     type="email" name="email"
+              >
               <has-error :form="form" field="email" />
             </div>
           </div>
@@ -26,13 +22,9 @@
               $t("password")
             }}</label>
             <div class="col-md-7">
-              <input
-                v-model="form.password"
-                :class="{ 'is-invalid': form.errors.has('password') }"
-                class="form-control"
-                type="password"
-                name="password"
-              />
+              <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control"
+                     type="password" name="password"
+              >
               <has-error :form="form" field="password" />
             </div>
           </div>
@@ -45,10 +37,7 @@
                 {{ $t("remember_me") }}
               </checkbox>
 
-              <router-link
-                :to="{ name: 'password.request' }"
-                class="small ml-auto my-auto"
-              >
+              <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto">
                 {{ $t("forgot_password") }}
               </router-link>
             </div>
@@ -62,7 +51,7 @@
               </v-button>
 
               <!-- GitHub Login Button -->
-              <login-with-github></login-with-github>
+              <!-- <login-with-github /> -->
             </div>
           </div>
         </form>
@@ -72,59 +61,60 @@
 </template>
 
 <script>
-import Form from "vform";
-import Cookies from "js-cookie";
-import LoginWithGithub from "~/components/LoginWithGithub";
+import Form from 'vform'
+import Cookies from 'js-cookie'
+// import LoginWithGithub from '~/components/LoginWithGithub'
 
 export default {
-  layout: 'basic',
   components: {
-    LoginWithGithub,
+    // LoginWithGithub
   },
+  layout: 'basic',
 
-  middleware: "guest",
+  middleware: 'guest',
 
-  metaInfo() {
-    return { title: this.$t("login") };
+  metaInfo () {
+    return { title: this.$t('login') }
   },
 
   data: () => ({
     form: new Form({
-      email: "",
-      password: "",
+      email: '',
+      password: ''
     }),
-    remember: false,
+    remember: false
   }),
 
   methods: {
-    async login() {
+    async login () {
       // Submit the form.
       // console.log("asdasdasdasd");
-      const { data } = await this.form.post("/api/login");
-      
+      const { data } = await this.form.post('/api/login')
+      console.log(data)
+
       // Save the token.
-      this.$store.dispatch("auth/saveToken", {
+      this.$store.dispatch('auth/saveToken', {
         token: data.token,
-        remember: this.remember,
-      });
+        remember: this.remember
+      })
 
       // Fetch the user.
-      await this.$store.dispatch("auth/fetchUser");
+      await this.$store.dispatch('auth/fetchUser')
 
       // Redirect home.
-      this.redirect();
+      this.redirect()
     },
 
-    redirect() {
-      const intendedUrl = Cookies.get("intended_url");
+    redirect () {
+      const intendedUrl = Cookies.get('intended_url')
 
       if (intendedUrl) {
-        Cookies.remove("intended_url");
-        this.$router.push({ path: intendedUrl });
+        Cookies.remove('intended_url')
+        this.$router.push({ path: intendedUrl })
       } else {
-        this.$router.push({ name: "home" });
+        this.$router.push({ name: 'home' })
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

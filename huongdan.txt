@@ -1,0 +1,4 @@
+  layout: 'basic',
+  middleware: 'guest',
+
+liên quan đến trang hiển thị cho người phân quyền

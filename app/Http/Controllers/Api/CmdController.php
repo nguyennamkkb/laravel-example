@@ -10,16 +10,15 @@ class CmdController extends Controller
     public static function GetIduser()
     {
         $date = new \DateTime();
-        
-        $iduser = md5(rand(10,99)."?@c" . $date->getTimestamp() . rand(10,99)."*!)");    
+
+        $iduser = md5(rand(10, 99) . "?@c" . $date->getTimestamp() . rand(10, 99) . "*!)");
 
         return strtoupper($iduser);
     }
     public static function getCode()
     {
-        $code = intval(rand(100000,999999));
+        $code = intval(rand(100000, 999999));
         return $code;
-
     }
     public static function getDateTime()
     {
@@ -38,11 +37,10 @@ class CmdController extends Controller
         $num = number_format($str, 0, ',', '.');
         return $num;
     }
-    
+
     public static function replaceNumberFormat($str)
     {
-        $num = str_replace('.','',$str);
+        $num = str_replace('.', '', $str);
         return $num;
     }
-
 }
